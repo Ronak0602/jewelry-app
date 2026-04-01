@@ -2,12 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import productsData from "../products.json";
 
-const filters = {
-  // earrings: ["All Earrings", "Studs", "Drops", "Bali", "Hoops"],
-  // bracelets: ["All Bracelets", "Tennis", "Stiff"],
-  // pendants: ["All Pendants", "Everyday wear", "Solitaire"],
-  // necklace: ["All Necklaces", "Necklace Sparkle"],
-};
+const filters = {};
 
 const categoryHeroes = {
   rings: {

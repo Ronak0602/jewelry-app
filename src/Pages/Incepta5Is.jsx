@@ -158,6 +158,24 @@ function Incepta5ls() {
           </div>
         </div>
       </div>
+
+      <div className="max-w-5xl mx-auto px-6 py-16 text-center">
+        <p className="font-serif tracking-widest uppercase text-[20px] mb-2">
+          Mining - Free
+        </p>
+        <h2 className="text-xl text-slate-800 mb-2">
+          1 Carat of every Incepta diamond saves the world from
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 mt-12">
+          {stats.map((s, i) => (
+            <div key={i} className="flex flex-col items-center gap-3">
+              <img src={s.icon} alt={s.label} className="h-16 object-contain" />
+              <h3 className="text-2xl font-semibold">{s.value}</h3>
+              <p className="text-gray-500 text-xs text-center">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
