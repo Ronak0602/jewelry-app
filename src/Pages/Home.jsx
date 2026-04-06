@@ -342,7 +342,7 @@ function Home() {
       </div>
       {/* 6. Our Story - Optimized Size */}
       <div className="bg-white py-16 px-4 md:px-20 flex justify-center items-center">
-        <div className="max-w-7xl mx-auto bg-[#fbfbfb] flex flex-col md:flex-row items-center border border-gray-100">
+        <div className="max-w-7xl w-full bg-[#f8f8f8] border border-[#e5e5e5] flex flex-col md:flex-row items-center gap-6 p-6 md:p-4 relative overflow-hidden">
           {/* Text Section */}
           <div className="w-full md:w-1/2 z-20">
             <h2
@@ -372,7 +372,7 @@ function Home() {
           </div>
 
           {/* Image Section - Height reduced to match original scale */}
-          <div className="w-full md:w-1/2 relative flex justify-center items-center bg-[#f3f3f3] h-[300px] md:h-[500px] overflow-hidden">
+          <div className="w-full md:w-1/2 relative flex items-center justify-end min-h-[250px]">
             {/* Diamond Shape Overlay */}
             <img
               src="https://dm8gt282gukv8.cloudfront.net/homepage/17664957342137546704.png"

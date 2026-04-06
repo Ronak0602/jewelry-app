@@ -41,10 +41,11 @@ img, video {
   [class*="mr-16"], [class*="mr-12"] { margin-right: 0 !important; }
   [class*="mt-20"] { margin-top: 2rem !important; }
 
-  
-  [class*="grid-cols-4"] { grid-template-columns: repeat(2, 1fr) !important; }
-  [class*="grid-cols-3"] { grid-template-columns: repeat(1, 1fr) !important; }
-  [class*="grid-cols-2"] { grid-template-columns: repeat(1, 1fr) !important; }
+  [class*="grid-cols-4"], [class*="grid-cols-3"], [class*="grid-cols-2"] { 
+  grid-template-columns: repeat(1, 1fr) !important; 
+  gap: 20px !important;
+  padding: 0 10px !important;
+}
 
 
   .flex:not(nav .flex):not(header .flex) {
