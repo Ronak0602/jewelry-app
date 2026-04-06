@@ -115,8 +115,8 @@ img, video {
 
   [class*="h-screen"] video { object-position: center !important; }
 
-  footer [class*="flex"] { flex-wrap: wrap !important; }
-  footer [class*="grid"] { grid-template-columns: repeat(2, 1fr) !important; }
+  /* footer [class*="flex"] { flex-wrap: wrap !important; }
+  footer [class*="grid"] { grid-template-columns: repeat(2, 1fr) !important; } */
 
   
   [class*="pb-6"] { padding-bottom: 1rem !important; }
