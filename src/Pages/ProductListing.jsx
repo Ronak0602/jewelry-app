@@ -153,7 +153,7 @@ function ProductListing() {
     <div>
       {/* ── Hero Banner ── */}
       <div
-        className="relative w-full h-[250px] md:h-[520px] bg-cover bg-center flex items-center"
+        className="relative w-full h-[200px] md:h-[520px] bg-cover bg-center flex items-center"
         style={{ backgroundImage: `url(${hero.image})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-white/60 via-white/10 to-transparent" />

@@ -30,7 +30,7 @@ function Footer() {
           <img
             src="https://inceptajewels.com/images/size_popup05.png"
             alt="Incepta"
-            className="h-40 w-40 ml-0 md:ml-12 object-contain"
+            className="h-40 w-40 ml-0 md:ml-8 object-contain"
           />
           <div className="flex gap-3 mt-3">
             {["instagram", "twitter", "linkedin", "facebook", "youtube"].map(
