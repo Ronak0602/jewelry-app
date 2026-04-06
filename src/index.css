@@ -10,6 +10,11 @@ body {
   overflow-x: hidden;
 }
 
+footer {
+  position: relative;
+  z-index: 0;
+}
+
 img, video {
   max-width: 100%;
   height: auto;
@@ -18,7 +23,7 @@ img, video {
 
 @media (max-width: 640px) {
 
- 
+  
   [class*="px-48"], [class*="px-32"], [class*="px-20"],
   [class*="px-16"], [class*="px-12"], [class*="px-10"] {
     padding-left: 1rem !important;
@@ -26,6 +31,7 @@ img, video {
   }
   [class*="pl-16"], [class*="pl-12"] { padding-left: 1rem !important; }
   [class*="pr-16"], [class*="pr-12"] { padding-right: 1rem !important; }
+
 
   [class*="mx-48"], [class*="mx-32"], [class*="mx-20"] {
     margin-left: 1rem !important;
@@ -35,6 +41,7 @@ img, video {
   [class*="mr-16"], [class*="mr-12"] { margin-right: 0 !important; }
   [class*="mt-20"] { margin-top: 2rem !important; }
 
+  
   [class*="grid-cols-4"] { grid-template-columns: repeat(2, 1fr) !important; }
   [class*="grid-cols-3"] { grid-template-columns: repeat(1, 1fr) !important; }
   [class*="grid-cols-2"] { grid-template-columns: repeat(1, 1fr) !important; }

@@ -44,9 +44,9 @@ function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f6f6f6] p-6  sm:p-8">
+    <div className="bg-[#f6f6f6]">
       <div className="mx-auto flex min-h-full w-full mt-20 items-center justify-center">
-        <div className="w-full max-w-96 border border-[#d2d2d2] bg-[#f8f8f8] px-7 pt-12 pb-12">
+        <div className="w-full max-w-96 border border-[#d2d2d2] bg-[#f8f8f8] px-7 p-10">
           {/* Brand */}
           <div className="mb-6 mt-4 flex justify-center">
             <h1 className="text-[31px] leading-none tracking-[0.11em] text-black">
@@ -123,21 +123,19 @@ function Register() {
               id="terms"
               checked={formData.terms}
               onChange={handleChange}
-              className="mb-2 h-6 w-5 shrink-0 cursor-pointer rounded-sm border border-black bg-white accent-black"
+              className="h-4 w-4 mt-1 shrink-0 cursor-pointer border border-black bg-white accent-black"
             />
-            <div className="text-center text-[13.5px]  text-black">
-              <div className="whitespace-nowrap">
+            <div className="text-[13.5px] text-black flex-1">
+              <span>
                 By clicking this, I accept the{" "}
                 <span className="cursor-pointer underline underline-offset-[3px]">
                   Terms & conditions
                 </span>{" "}
-                &
-              </div>
-              <div className="mt-0.5">
+                &{" "}
                 <span className="cursor-pointer underline underline-offset-[3px]">
                   Privacy policy
                 </span>
-              </div>
+              </span>
             </div>
           </div>
 
@@ -152,7 +150,10 @@ function Register() {
           {/* Bottom Links */}
           <div className="mt-3 font-stretch-75% flex justify-center gap-6 text-[14px] text-black">
             <span
-              onClick={() => navigate("/")}
+              onClick={() => {
+                navigate("/");
+                window.scrollTo(0, 0);
+              }}
               className="cursor-pointer underline underline-offset-[3px]"
             >
               Back to store

@@ -10,7 +10,7 @@ function ManufacturingProcess() {
         />
       </div>
 
-      <div className="bg-gray-100 min-h-screen" style={{ fontFamily: "serif" }}>
+      <div className="bg-gray-100" style={{ fontFamily: "serif" }}>
         {/* Page Title + Intro */}
         <div className="mx-auto px-6 pt-14 pb-10" style={{ maxWidth: "990px" }}>
           <h1

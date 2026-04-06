@@ -194,7 +194,10 @@ function Login() {
             Back to store
           </span>
           <span
-            onClick={() => navigate("/register")}
+            onClick={() => {
+              navigate("/register");
+              window.scrollTo(0, 0);
+            }}
             className="text-xs font-serif text-gray-600 underline underline-offset-4 cursor-pointer hover:text-black"
           >
             Create account

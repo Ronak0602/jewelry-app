@@ -135,8 +135,8 @@ function FAQ() {
 
   return (
     <div className="bg-white min-h-screen" style={{ fontFamily: "serif" }}>
-      {/* ── Hero Banner with overlay ── */}
-      <div className="relative w-full h-[280px] md:h-[420px]">
+      {/* ── Hero Banner ── */}
+      <div className="relative w-full h-[220px] md:h-[420px]">
         <img
           src="https://inceptajewels.com/images/banners/faq-banner.png"
           alt="FAQ Banner"
@@ -149,19 +149,17 @@ function FAQ() {
             e.target.parentElement.style.backgroundPosition = "center";
           }}
         />
-
-        {/* Dark overlay */}
         <div
           className="absolute inset-0"
           style={{ background: "rgba(0,0,0,0.40)" }}
         />
 
-        {/* Title + Search on image */}
+        {/* Title + Search */}
         <div className="absolute inset-0 flex flex-col items-center justify-center px-6">
           <h1
-            className="text-white text-center mb-10"
+            className="text-white text-center mb-6"
             style={{
-              fontSize: "clamp(20px, 3.5vw, 38px)",
+              fontSize: "clamp(16px, 3.5vw, 38px)",
               fontWeight: 300,
               letterSpacing: "0.15em",
               fontFamily: "serif",
@@ -169,8 +167,6 @@ function FAQ() {
           >
             FREQUENTLY ASKED QUESTIONS
           </h1>
-
-          {/* Underline search bar */}
           <div
             className="flex items-center w-full max-w-2xl pb-2"
             style={{ borderBottom: "1px solid rgba(255,255,255,0.8)" }}
@@ -180,7 +176,7 @@ function FAQ() {
               placeholder="Start Typing..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1 bg-transparent outline-none text-white text-base"
+              className="flex-1 bg-transparent outline-none text-white text-sm md:text-base"
               style={{
                 letterSpacing: "0.05em",
                 fontFamily: "serif",
@@ -188,8 +184,8 @@ function FAQ() {
               }}
             />
             <svg
-              width="22"
-              height="22"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               stroke="white"
@@ -201,59 +197,55 @@ function FAQ() {
             </svg>
           </div>
         </div>
+      </div>
 
-        {/* Category tabs — half overlapping bottom of banner */}
+      {/* ── Category Tabs — Normal flow, no absolute ── */}
+      <div className="flex justify-center px-4 bg-white shadow-sm">
         <div
-          className="absolute left-0 right-0 flex justify-center px-4"
-          style={{ bottom: "-144px" }}
+          className="grid grid-cols-2 md:grid-cols-4 w-full"
+          style={{
+            maxWidth: "900px",
+            boxShadow: "0 2px 16px rgba(0,0,0,0.10)",
+          }}
         >
-          <div
-            className="grid grid-cols-2 md:grid-cols-4 w-full"
-            style={{
-              maxWidth: "900px",
-              boxShadow: "0 2px 16px rgba(0,0,0,0.10)",
-            }}
-          >
-            {categories.map((cat, idx) => {
-              const isActive = activeCategory === cat.label;
-              return (
-                <button
-                  key={cat.label}
-                  onClick={() => setActiveCategory(cat.label)}
-                  className="flex flex-col items-center justify-center bg-white transition-all duration-200"
+          {categories.map((cat, idx) => {
+            const isActive = activeCategory === cat.label;
+            return (
+              <button
+                key={cat.label}
+                onClick={() => setActiveCategory(cat.label)}
+                className="flex flex-col items-center justify-center bg-white transition-all duration-200 py-4 md:py-5"
+                style={{
+                  borderBottom: isActive
+                    ? "3px solid #1a1a1a"
+                    : "3px solid transparent",
+                  borderRight: idx % 2 === 0 ? "1px solid #ebebeb" : "none",
+                  color: isActive ? "#1a1a1a" : "#777777",
+                  cursor: "pointer",
+                }}
+              >
+                <span className="mb-2">{cat.icon}</span>
+                <span
                   style={{
-                    padding: "20px 12px 16px",
-                    borderBottom: isActive
-                      ? "3px solid #1a1a1a"
-                      : "3px solid transparent",
-                    borderRight: idx < 3 ? "1px solid #ebebeb" : "none",
-                    color: isActive ? "#1a1a1a" : "#777777",
-                    cursor: "pointer",
+                    fontSize: "9px",
+                    letterSpacing: "0.1em",
+                    fontFamily: "sans-serif",
+                    fontWeight: 600,
                   }}
                 >
-                  <span className="mb-2">{cat.icon}</span>
-                  <span
-                    style={{
-                      fontSize: "10px",
-                      letterSpacing: "0.13em",
-                      fontFamily: "sans-serif",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {cat.label}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+                  {cat.label}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
-      {/* Spacer for tabs overlap */}
-      <div style={{ height: "170px" }} />
-
       {/* ── FAQ Accordion ── */}
-      <div className="mx-auto px-6 pb-6" style={{ maxWidth: "1100px" }}>
+      <div
+        className="mx-auto px-4 md:px-6 pb-6 pt-6"
+        style={{ maxWidth: "1100px" }}
+      >
         {filtered.length === 0 && (
           <p
             className="text-center py-12"
@@ -279,7 +271,7 @@ function FAQ() {
               >
                 <span
                   style={{
-                    fontSize: "15px",
+                    fontSize: "14px",
                     color: "#1a1a1a",
                     fontFamily: "serif",
                     fontWeight: 400,
@@ -296,7 +288,7 @@ function FAQ() {
                   strokeWidth="1.8"
                   style={{
                     flexShrink: 0,
-                    marginLeft: "20px",
+                    marginLeft: "16px",
                     transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
                     transition: "transform 0.3s ease",
                   }}
@@ -314,11 +306,11 @@ function FAQ() {
               >
                 <p
                   style={{
-                    fontSize: "14px",
+                    fontSize: "13px",
                     color: "#555555",
                     lineHeight: "1.85",
                     paddingBottom: "22px",
-                    paddingRight: "40px",
+                    paddingRight: "20px",
                     fontFamily: "serif",
                   }}
                 >

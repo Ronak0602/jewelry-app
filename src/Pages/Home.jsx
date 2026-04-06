@@ -119,7 +119,7 @@ function Home() {
           src="https://dm8gt282gukv8.cloudfront.net/images/WhatsApp Video 2025-12-17 at 17N090848.mp4"
         />
         <div className="absolute inset-0 bg-black bg-opacity-30" />
-        <div className="absolute inset-0 flex flex-col justify-center px-6 md:px-16">
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center px-6">
           <p className="text-white text-sm tracking-widest mb-2">
             Incepta Jewels
           </p>
@@ -250,9 +250,9 @@ function Home() {
         <p className="text-gray-500 text-base mb-10">
           Customers love our products and we always strive to please them all.
         </p>
-        <div className="flex justify-center gap-6 flex-wrap">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 px-4">
           {bestSellers.map((product) => (
-            <div key={product.name} className="w-[45%] md:w-64 cursor-pointer">
+            <div key={product.name} className="w-full cursor-pointer group">
               <div className="overflow-hidden mb-3 relative">
                 <img
                   src={product.img}
@@ -342,7 +342,7 @@ function Home() {
       </div>
       {/* 6. Our Story - Optimized Size */}
       <div className="bg-white py-16 px-4 md:px-20 flex justify-center items-center">
-        <div className="max-w-7xl w-full bg-[#f8f8f8] border border-[#e5e5e5] flex flex-col md:flex-row items-center gap-6 p-6 md:p-4 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto bg-[#fbfbfb] flex flex-col md:flex-row items-center border border-gray-100">
           {/* Text Section */}
           <div className="w-full md:w-1/2 z-20">
             <h2
@@ -372,7 +372,7 @@ function Home() {
           </div>
 
           {/* Image Section - Height reduced to match original scale */}
-          <div className="w-full md:w-1/2 relative flex items-center justify-end min-h-[250px]">
+          <div className="w-full md:w-1/2 relative flex justify-center items-center bg-[#f3f3f3] h-[300px] md:h-[500px] overflow-hidden">
             {/* Diamond Shape Overlay */}
             <img
               src="https://dm8gt282gukv8.cloudfront.net/homepage/17664957342137546704.png"
