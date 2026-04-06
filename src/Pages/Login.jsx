@@ -87,7 +87,7 @@ function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
+    <div className=" flex items-center justify-center bg-white py-10 md:py-20">
       <div className="border border-gray-300 px-10 py-10 w-full max-w-sm">
         {/* Logo */}
         <div className="flex justify-center mb-6">
@@ -186,7 +186,7 @@ function Login() {
         </button>
 
         {/* Bottom Links */}
-        <div className="flex justify-center gap-6">
+        <div className="flex justify-center gap-6 mt-4">
           <span
             onClick={() => navigate("/")}
             className="text-xs font-serif text-gray-600 underline underline-offset-4 cursor-pointer hover:text-black"
