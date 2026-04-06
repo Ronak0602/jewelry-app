@@ -134,7 +134,7 @@ function FAQ() {
   );
 
   return (
-    <div className="bg-white min-h-screen" style={{ fontFamily: "serif" }}>
+    <div className="bg-white" style={{ fontFamily: "serif" }}>
       {/* ── Hero Banner ── */}
       <div className="relative w-full h-[220px] md:h-[420px]">
         <img
