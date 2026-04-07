@@ -31,11 +31,7 @@ function Login() {
           photoURL: user.photoURL,
         }),
       );
-      toast.success("Google Login Successful!", {
-        position: "top-right",
-        autoClose: 3000,
-        pauseOnHover: true,
-      });
+      alert("Google Login Successful!");
       navigate("/");
     } catch (error) {
       toast.error("Google Login Failed!", {
