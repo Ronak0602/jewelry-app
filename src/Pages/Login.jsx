@@ -1,5 +1,9 @@
-import { signInWithPopup } from "firebase/auth";
-import { useState } from "react";
+import {
+  getRedirectResult,
+  signInWithPopup,
+  signInWithRedirect,
+} from "firebase/auth";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, googleProvider } from "../firebase";
 import { toast } from "react-toastify";
@@ -13,6 +17,51 @@ function Login() {
   });
   const [showPassword, setShowPassword] = useState(false);
 
+  const redirectToHome = () => {
+    window.scrollTo(0, 0);
+    window.location.replace("/");
+  };
+
+  const saveAndNavigate = (user) => {
+    localStorage.setItem("loggedIn", "true");
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      }),
+    );
+
+    toast.success("Google Login Successful!", {
+      position: "top-right",
+      autoClose: 3000,
+      pauseOnHover: true,
+    });
+
+    redirectToHome();
+  };
+
+  useEffect(() => {
+    const handleRedirectLogin = async () => {
+      try {
+        const result = await getRedirectResult(auth);
+        if (result?.user) {
+          saveAndNavigate(result.user);
+        }
+      } catch (error) {
+        toast.error("Google Login Failed!", {
+          position: "top-right",
+          autoClose: 3000,
+          theme: "dark",
+          pauseOnHover: true,
+        });
+      }
+    };
+
+    handleRedirectLogin();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
@@ -20,20 +69,26 @@ function Login() {
 
   const handleGoogleLogin = async () => {
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const user = result.user;
-      localStorage.setItem("loggedIn", "true");
-      localStorage.setItem(
-        "user",
-        JSON.stringify({
-          email: user.email,
-          displayName: user.displayName,
-          photoURL: user.photoURL,
-        }),
+      const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(
+        navigator.userAgent,
       );
-      alert("Google Login Successful!");
-      navigate("/");
+
+      if (isMobile) {
+        await signInWithRedirect(auth, googleProvider);
+        return;
+      }
+
+      const result = await signInWithPopup(auth, googleProvider);
+      saveAndNavigate(result.user);
     } catch (error) {
+      if (
+        error?.code === "auth/popup-blocked" ||
+        error?.code === "auth/popup-closed-by-user"
+      ) {
+        await signInWithRedirect(auth, googleProvider);
+        return;
+      }
+
       toast.error("Google Login Failed!", {
         position: "top-right",
         autoClose: 3000,
@@ -82,8 +137,7 @@ function Login() {
 
       pauseOnHover: true,
     });
-    navigate("/");
-    window.scrollTo(0, 0);
+    redirectToHome();
   };
 
   return (

@@ -34,7 +34,7 @@ function Register() {
       return;
     }
     if (!formData.terms) {
-      alert("Terms & Conditions accept karo!");
+      toast.error("You must accept the terms and conditions!");
       return;
     }
     localStorage.setItem("user", JSON.stringify(formData));
