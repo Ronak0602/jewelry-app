@@ -31,8 +31,7 @@ function Login() {
           photoURL: user.photoURL,
         }),
       );
-      alert("Google Login Successful!");
-      navigate("/");
+      (toast.success("Google Login Successful!"), navigate("/"));
     } catch (error) {
       toast.error("Google Login Failed!", {
         position: "top-right",
