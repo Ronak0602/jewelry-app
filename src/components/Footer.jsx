@@ -1,6 +1,52 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 function Footer() {
   const navigate = useNavigate();
+  const [openSection, setOpenSection] = useState(null);
+
+  const companyLinks = [
+    { label: "Home", path: "/" },
+    { label: "Our Story", path: "/about" },
+    { label: "FAQ", path: "/faq" },
+    { label: "My Wishlist", path: "/wishlist" },
+    { label: "Manufacturing Process", path: "/manufacturing-process" },
+  ];
+
+  const accountLinks = [
+    { label: "My Account", path: "/login" },
+    { label: "My Cart", path: "/cart" },
+    { label: "Checkout", path: "/login" },
+    { label: "My Wishlist", path: "/wishlist" },
+    { label: "Tracking Order", path: "/" },
+  ];
+
+  const helpLinks = [
+    { label: "Contact Us" },
+    { label: "Book an Appointment" },
+    { label: "Size Guide", path: "/size-guide" },
+    { label: "Privacy Policy" },
+    { label: "Delivery & Returns" },
+    { label: "Terms & Conditions" },
+  ];
+
+  const contactInfo = [
+    { label: "Phone", value: "+ 91 8718-8718-00" },
+    { label: "Email", value: "contact@inceptajewels.com" },
+    {
+      label: "Location",
+      value:
+        "Aaron Spectra 210, Rajpath Rangoli Rd, Bodakdev, Ahmedabad, Gujarat 380054",
+    },
+  ];
+
+  const mobileSections = [
+    { key: "company", title: "Company", items: companyLinks },
+    { key: "account", title: "My Account", items: accountLinks },
+    { key: "help", title: "Help", items: helpLinks },
+    { key: "contact", title: "Contact", items: contactInfo, isContact: true },
+  ];
+
   return (
     <footer className="bg-[#f8f8f4]">
       {/* Subscribe Section */}
@@ -11,20 +57,118 @@ function Footer() {
             Subscribe For Incepta Jewels News And Exclusive Offers
           </span>
         </h3>
-        <div className="flex flex-col sm:flex-row max-w-xl mx-auto border border-gray-100 rounded-lg bg-white">
+        <div className="flex flex-col sm:flex-row w-full max-w-[250px] md:max-w-lg mx-auto rounded-lg">
           <input
             type="email"
             placeholder="Enter your email here .."
-            className="flex-1 px-9 py-3 text-xs rounded-lg font-sans tracking-widest focus:outline-none"
+            className="w-full sm:flex-1 h-8 px-6 text-[13px] rounded-lg font-serif tracking-widest focus:outline-none"
           />
-          <button className="bg-gray-200 px-6 py-2 hover:text-white text-xs font-bold transition duration-300 border border-gray-300 m-1">
+          <button className="w-full sm:w-auto h-8 mt-2 sm:mt-1 bg-gray-200 px-6 hover:text-white text-xs font-semibold transition duration-300 border border-gray-300 rounded">
             Get Subscribed!
           </button>
         </div>
       </div>
 
-      {/* Main Footer */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap lg:justify-between px-6 md:px-16 lg:px-48 text-xs pt-2 gap-6">
+      {/* Mobile Footer */}
+      <div className="md:hidden px-4 pt-2">
+        <div className="flex flex-col items-center">
+          <img
+            src="https://inceptajewels.com/images/size_popup05.png"
+            alt="Incepta"
+            className="h-40 w-40 object-contain"
+          />
+          <div className="flex gap-3 mt-2 mb-4">
+            {["instagram", "twitter", "linkedin", "facebook", "youtube"].map(
+              (s) => (
+                <div
+                  key={s}
+                  className="w-8 h-8 bg-gray-400 text-white flex items-center justify-center cursor-pointer"
+                >
+                  <i className={`fab fa-${s} text-xs`}></i>
+                </div>
+              ),
+            )}
+          </div>
+        </div>
+
+        <div className="space-y-1 text-left">
+          {mobileSections.map((section) => {
+            const isOpen = openSection === section.key;
+            return (
+              <div key={section.key} className="border-b border-gray-300">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setOpenSection((prev) =>
+                      prev === section.key ? null : section.key,
+                    )
+                  }
+                  className="w-full py-3 flex items-center justify-between text-base text-gray-900"
+                >
+                  <span>{section.title}</span>
+                  <span className="text-base">{isOpen ? "-" : "⌄"}</span>
+                </button>
+
+                {isOpen && (
+                  <div className="pb-3 text-xs text-gray-600 space-y-2">
+                    {section.isContact
+                      ? section.items.map((item) => (
+                          <div key={item.label}>
+                            <p className="font-semibold text-black">
+                              {item.label}
+                            </p>
+                            <p>{item.value}</p>
+                          </div>
+                        ))
+                      : section.items.map((item) => (
+                          <p
+                            key={item.label}
+                            onClick={() => item.path && navigate(item.path)}
+                            className="cursor-pointer hover:text-black"
+                          >
+                            {item.label}
+                          </p>
+                        ))}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 mb-6 border border-gray-200 bg-white rounded-lg px-4 py-4 text-xs text-gray-600 text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <span>We Accept</span>
+            <img
+              src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/upi.CmgCfll8.svg"
+              className="h-6"
+              alt="UPI"
+            />
+            <img
+              src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/visa.sxIq5Dot.svg"
+              className="h-6"
+              alt="Visa"
+            />
+            <img
+              src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/master.CzeoQWmc.svg"
+              className="h-6"
+              alt="Mastercard"
+            />
+            <img
+              src="https://cdn.shopify.com/shopifycloud/checkout-web/assets/c1.en/assets/rupay.Bl62X6PG.svg"
+              className="h-6"
+              alt="Rupay"
+            />
+          </div>
+          <p>
+            © 2026, <span className="font-bold">incepta jewels</span> All Rights
+            Reserved
+          </p>
+        </div>
+      </div>
+
+      {/* Desktop Footer */}
+      <div className="hidden md:grid md:grid-cols-2 lg:flex lg:flex-wrap lg:justify-between px-6 md:px-16 lg:px-48 text-xs pt-2 gap-6">
         {/* Logo & Social */}
         <div className="flex flex-col gap-2">
           <img
@@ -146,7 +290,7 @@ function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between mx-4 md:mx-32 mb-3 mt-10 md:mt-20 py-4 border border-gray-200 bg-white rounded-lg text-xs text-gray-600 px-4 md:px-16 gap-3">
+      <div className="hidden md:flex flex-col sm:flex-row items-center justify-between mx-4 md:mx-32 mb-3 mt-10 md:mt-20 py-4 border border-gray-200 bg-white rounded-lg text-xs text-gray-600 px-4 md:px-16 gap-3">
         <p>
           © 2026, <span className="font-bold">incepta jewels</span> All Rights
           Reserved
