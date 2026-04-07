@@ -1,9 +1,12 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function Footer() {
-  const navigate = useNavigate();
   const [openSection, setOpenSection] = useState(null);
+
+  const redirectWithRefresh = (path) => {
+    if (!path) return;
+    window.location.href = path;
+  };
 
   const companyLinks = [
     { label: "Home", path: "/" },
@@ -123,7 +126,7 @@ function Footer() {
                       : section.items.map((item) => (
                           <p
                             key={item.label}
-                            onClick={() => item.path && navigate(item.path)}
+                            onClick={() => redirectWithRefresh(item.path)}
                             className="cursor-pointer hover:text-black"
                           >
                             {item.label}
@@ -203,7 +206,7 @@ function Footer() {
           ].map((item) => (
             <p
               key={item.label}
-              onClick={() => navigate(item.path)}
+              onClick={() => redirectWithRefresh(item.path)}
               className="text-xs text-gray-600 hover:text-black cursor-pointer mb-2"
             >
               {item.label}
@@ -224,7 +227,7 @@ function Footer() {
           ].map((item) => (
             <p
               key={item.label}
-              onClick={() => navigate(item.path)}
+              onClick={() => redirectWithRefresh(item.path)}
               className="text-xs text-gray-600 hover:text-black cursor-pointer mb-2"
             >
               {item.label}
@@ -246,7 +249,7 @@ function Footer() {
           ].map((item) => (
             <p
               key={item.label || item}
-              onClick={() => item.path && navigate(item.path)}
+              onClick={() => redirectWithRefresh(item.path)}
               className="text-xs text-gray-600 hover:text-black cursor-pointer mb-1"
             >
               {item.label || item}
