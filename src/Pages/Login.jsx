@@ -22,6 +22,32 @@ function Login() {
     window.location.replace("/");
   };
 
+  const showGoogleError = (error) => {
+    const code = error?.code || "unknown";
+    let message = `Google Login Failed (${code})`;
+
+    if (code === "auth/unauthorized-domain") {
+      message = "This domain is not authorized in Firebase Auth settings.";
+    } else if (code === "auth/operation-not-allowed") {
+      message = "Google provider is disabled in Firebase Authentication.";
+    } else if (code === "auth/network-request-failed") {
+      message = "Network issue on phone. Try again with stable internet.";
+    } else if (code === "auth/popup-blocked") {
+      message = "Popup blocked. Redirect login started instead.";
+    } else if (code === "auth/popup-closed-by-user") {
+      message = "Popup closed. Redirect login started instead.";
+    }
+
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 4000,
+      theme: "dark",
+      pauseOnHover: true,
+    });
+
+    console.error("Google login error:", error);
+  };
+
   const saveAndNavigate = (user) => {
     localStorage.setItem("loggedIn", "true");
     localStorage.setItem(
@@ -50,12 +76,7 @@ function Login() {
           saveAndNavigate(result.user);
         }
       } catch (error) {
-        toast.error("Google Login Failed!", {
-          position: "top-right",
-          autoClose: 3000,
-          theme: "dark",
-          pauseOnHover: true,
-        });
+        showGoogleError(error);
       }
     };
 
@@ -89,12 +110,7 @@ function Login() {
         return;
       }
 
-      toast.error("Google Login Failed!", {
-        position: "top-right",
-        autoClose: 3000,
-        theme: "dark",
-        pauseOnHover: true,
-      });
+      showGoogleError(error);
     }
   };
 
