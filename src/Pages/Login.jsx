@@ -1,9 +1,5 @@
-import {
-  getRedirectResult,
-  signInWithPopup,
-  signInWithRedirect,
-} from "firebase/auth";
-import { useEffect, useState } from "react";
+import { signInWithPopup } from "firebase/auth";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, googleProvider } from "../firebase";
 import { toast } from "react-toastify";
@@ -17,72 +13,6 @@ function Login() {
   });
   const [showPassword, setShowPassword] = useState(false);
 
-  const redirectToHome = () => {
-    window.scrollTo(0, 0);
-    window.location.replace("/");
-  };
-
-  const showGoogleError = (error) => {
-    const code = error?.code || "unknown";
-    let message = `Google Login Failed (${code})`;
-
-    if (code === "auth/unauthorized-domain") {
-      message = "This domain is not authorized in Firebase Auth settings.";
-    } else if (code === "auth/operation-not-allowed") {
-      message = "Google provider is disabled in Firebase Authentication.";
-    } else if (code === "auth/network-request-failed") {
-      message = "Network issue on phone. Try again with stable internet.";
-    } else if (code === "auth/popup-blocked") {
-      message = "Popup blocked. Redirect login started instead.";
-    } else if (code === "auth/popup-closed-by-user") {
-      message = "Popup closed. Redirect login started instead.";
-    }
-
-    toast.error(message, {
-      position: "top-right",
-      autoClose: 4000,
-      theme: "dark",
-      pauseOnHover: true,
-    });
-
-    console.error("Google login error:", error);
-  };
-
-  const saveAndNavigate = (user) => {
-    localStorage.setItem("loggedIn", "true");
-    localStorage.setItem(
-      "user",
-      JSON.stringify({
-        email: user.email,
-        displayName: user.displayName,
-        photoURL: user.photoURL,
-      }),
-    );
-
-    toast.success("Google Login Successful!", {
-      position: "top-right",
-      autoClose: 3000,
-      pauseOnHover: true,
-    });
-
-    redirectToHome();
-  };
-
-  useEffect(() => {
-    const handleRedirectLogin = async () => {
-      try {
-        const result = await getRedirectResult(auth);
-        if (result?.user) {
-          saveAndNavigate(result.user);
-        }
-      } catch (error) {
-        showGoogleError(error);
-      }
-    };
-
-    handleRedirectLogin();
-  }, []);
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
@@ -90,27 +20,30 @@ function Login() {
 
   const handleGoogleLogin = async () => {
     try {
-      const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(
-        navigator.userAgent,
-      );
-
-      if (isMobile) {
-        await signInWithRedirect(auth, googleProvider);
-        return;
-      }
-
       const result = await signInWithPopup(auth, googleProvider);
-      saveAndNavigate(result.user);
+      const user = result.user;
+      localStorage.setItem("loggedIn", "true");
+      localStorage.setItem(
+        "user",
+        JSON.stringify({
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        }),
+      );
+      toast.success("Google Login Successful!", {
+        position: "top-right",
+        autoClose: 3000,
+        pauseOnHover: true,
+      });
+      navigate("/");
     } catch (error) {
-      if (
-        error?.code === "auth/popup-blocked" ||
-        error?.code === "auth/popup-closed-by-user"
-      ) {
-        await signInWithRedirect(auth, googleProvider);
-        return;
-      }
-
-      showGoogleError(error);
+      toast.error("Google Login Failed!", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: "dark",
+        pauseOnHover: true,
+      });
     }
   };
 
@@ -153,7 +86,8 @@ function Login() {
 
       pauseOnHover: true,
     });
-    redirectToHome();
+    navigate("/");
+    window.scrollTo(0, 0);
   };
 
   return (
