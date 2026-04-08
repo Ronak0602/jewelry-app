@@ -81,7 +81,7 @@ function Navbar() {
         {/* Hamburger - mobile only */}
         <div className="flex items-center gap-4">
           <button
-            className="lg:hidden flex flex-col gap-1.5 cursor-pointer ml-1"
+            className="hamburger-btn flex flex-col gap-1.5 cursor-pointer ml-1"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             <span
@@ -103,7 +103,7 @@ function Navbar() {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="desktop-menu flex items-center gap-6">
           {Object.keys(menuItems).map((item) => (
             <div
               key={item}
@@ -135,7 +135,7 @@ function Navbar() {
         {/* Right Icons */}
         <div className="flex items-center gap-3 md:gap-4">
           {/* Search - desktop only */}
-          <div className="hidden md:flex items-center border border-gray-300 px-3 py-1.5 rounded-sm gap-2">
+          <div className="desktop-search flex items-center border border-gray-300 px-3 py-1.5 rounded-sm gap-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-4 w-4 text-gray-900"
@@ -162,7 +162,7 @@ function Navbar() {
           {/* Search icon - mobile only */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 md:hidden cursor-pointer"
+            className="mobile-search-icon h-5 w-5 cursor-pointer"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -178,7 +178,7 @@ function Navbar() {
           {/* Account */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 cursor-pointer hover:text-gray-500"
+            className="account-icon h-5 w-5 cursor-pointer hover:text-gray-500"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -244,7 +244,7 @@ function Navbar() {
 
       {/* ── Mobile Menu ── */}
       {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 px-6 pb-6">
+        <div className="mobile-drawer bg-white border-t border-gray-100 px-6 pb-6">
           {/* Mobile Search */}
           <div className="flex items-center border border-gray-300 px-3 py-2 rounded-sm gap-2 my-4">
             <svg
