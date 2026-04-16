@@ -44,9 +44,9 @@ function Register() {
   };
 
   return (
-    <div className="bg-[#f6f6f6]">
-      <div className="mx-auto flex min-h-full w-full mt-20 items-center justify-center">
-        <div className="w-full max-w-96 border border-[#d2d2d2] bg-[#f8f8f8] px-7 p-10">
+    <div>
+      <div className="mx-auto flex min-h-screen w-full  items-center justify-center">
+        <div className="w-full max-w-md border border-[#d2d2d2] bg-[#ffffff] px-7 p-10">
           {/* Brand */}
           <div className="mb-6 mt-4 flex justify-center">
             <h1 className="text-[31px] leading-none tracking-[0.11em] text-black">
