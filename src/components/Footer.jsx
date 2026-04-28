@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Footer() {
   const [openSection, setOpenSection] = useState(null);
+  const navigate = useNavigate();
 
   const redirectWithRefresh = (path) => {
     if (!path) return;
-    window.location.href = path;
+    navigate(path);
   };
 
   const companyLinks = [
