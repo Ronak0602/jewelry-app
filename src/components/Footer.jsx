@@ -8,6 +8,7 @@ function Footer() {
   const redirectWithRefresh = (path) => {
     if (!path) return;
     navigate(path);
+    window.scrollTo(0, 0);
   };
 
   const companyLinks = [
